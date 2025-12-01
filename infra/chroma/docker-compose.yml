@@ -1,0 +1,17 @@
+
+services:
+  chroma:
+    image: chroma-core/chroma:latest
+    ports:
+      - "8800:8800"
+    volumes:
+      - chroma_data:/chroma/chroma
+    environment:
+      - IS_PERSISTENT=TRUE
+      - CHROMA_SERVER_AUTHN_CREDENTIALS=test-token
+      - CHROMA_SERVER_AUTHN_PROVIDER=chromadb.auth.token_authn.TokenAuthenticationServerProvider
+    command: ["uvicorn", "chromadb.app:app", "--host", "0.0.0.0", "--port", "8800"]
+
+volumes:
+  chroma_data:
+    driver: local
