@@ -50,5 +50,5 @@ curl -X POST http://<node-ip>:30880/agent/query \
 ## 정리
 
 ```bash
-kubectl delete namespace gangwon
+`kubectl delete -n gangwon`
 ```

@@ -1,13 +1,18 @@
-apiVersion: v1
-kind: Service
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: backend-nodeport
+  name: backend-ingress
   namespace: gangwon
+  annotations:
+    kubernetes.io/ingress.class: alb
 spec:
-  type: NodePort
-  selector:
-    app: backend
-  ports:
-  - port: 8880
-    targetPort: 8880
-    nodePort: 30880
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-nodeport
+                port:
+                  number: 8880
