@@ -1,4 +1,7 @@
+from datetime import datetime
 from typing import Dict, Any
+
+from app.models.schemas.user import UserResponse
 
 
 class UserService:
@@ -12,4 +15,9 @@ class UserService:
         if not self._valid_email(email):
             raise ValueError("Invalid email format")
         # save 추가
-        return {'id': 1, 'name': name, 'email': email}
+        return UserResponse(
+                id=0,
+                name=name,
+                email=email,
+                created_at=str(datetime.now())
+    )
