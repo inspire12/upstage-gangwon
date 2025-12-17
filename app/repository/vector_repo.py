@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any, Optional
 from app.core.db import get_chroma_collection
+from abc import ABC, abstractmethod
+from typing import List, Dict, Any, Optional
+from app.core.db import get_chroma_collection
 
 
 class VectorRepository(ABC):

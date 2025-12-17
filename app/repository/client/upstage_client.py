@@ -1,21 +1,17 @@
-import os
 from typing import List
-
 from openai import OpenAI
+from app.core.settings import upstage_settings
 
 
 class UpstageClient:
 
     def __init__(self):
-        api_key = os.getenv("UPSTAGE_API_KEY")
-        if not api_key:
-            raise ValueError("UPSTAGE_API_KEY environment variable is required")
-        self.client = OpenAI(api_key=api_key, base_url="https://api.upstage.ai/v1")
+        self.client = OpenAI(api_key=upstage_settings.api_key, base_url=upstage_settings.base_url)
 
     def create_embeddings(self, texts: List[str]) -> List[List[float]]:
         try:
             response = self.client.embeddings.create(
-                model="solar-embedding-1-large-query",
+                model=upstage_settings.embedding_model,
                 input=texts
             )
             return [embedding.embedding for embedding in response.data]
