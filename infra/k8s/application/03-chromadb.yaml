@@ -18,6 +18,16 @@ spec:
         image: chromadb/chroma:latest
         ports:
         - containerPort: 8000
+        env:
+        - name: IS_PERSISTENT
+          value: "TRUE"
+        volumeMounts:
+        - name: chromadb-data
+          mountPath: /chroma/chroma
+      volumes:
+      - name: chromadb-data
+        persistentVolumeClaim:
+          claimName: chromadb-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -29,3 +39,19 @@ spec:
     app: chromadb
   ports:
   - port: 8000
+    targetPort: 8000
+    protocol: TCP
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: chromadb-pvc
+  namespace: gangwon
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard
