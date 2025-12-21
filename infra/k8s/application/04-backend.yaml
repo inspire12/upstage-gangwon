@@ -24,6 +24,13 @@ spec:
         image: upstage-gangwon-backend:lite
         ports:
         - containerPort: 8880
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "64Mi"
+          limits:
+            cpu: "200m"
+
         readinessProbe:
           httpGet:
             path: /agent/health
@@ -35,6 +42,7 @@ spec:
             name: app-config
         - secretRef:
             name: app-secret
+
 ---
 apiVersion: v1
 kind: Service
