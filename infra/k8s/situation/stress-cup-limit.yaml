@@ -16,6 +16,7 @@ spec:
       containers:
         - name: stress
           image: polinux/stress:1.0.4
+          command: ["stress"]
           args: ["--cpu", "2", "--timeout", "3600s"]
           resources:
             requests:
