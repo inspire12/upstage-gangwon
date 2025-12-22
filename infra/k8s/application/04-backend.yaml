@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: upstage-gangwon-backend:lite
+        image: ghcr.io/inspire12/upstage-gangwon-fastapi-lecture:latest
         ports:
         - containerPort: 8880
         resources:
